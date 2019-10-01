@@ -12,6 +12,7 @@ function getTextItems(searchTerm) {
     .from('shopping_list')
     .where('name', 'ILIKE', `%${searchTerm}%`)
     .then(result => {
+      console.log('SEARCH TERM', searchTerm)
       console.log(result);
     });
   //query shopping_list
@@ -30,6 +31,7 @@ function getPaginatedItems(page) {
     .limit(numberOfItemsPerPg)
     .offset(offset)
     .then(result => {
+      console.log('PAGINATE ITEMS', { page })
       console.log(result);
     });
 }
@@ -37,7 +39,6 @@ function getPaginatedItems(page) {
 getPaginatedItems(1);
 
 function getItemsAddedAfterDate(daysAgo) {
-
   knexInstance
     .select('name', 'price', 'date_added', 'category')
     .from('shopping_list')
@@ -47,7 +48,7 @@ function getItemsAddedAfterDate(daysAgo) {
       knexInstance.raw(`now() -'?? days'::INTERVAL`, daysAgo)
       )
     .then(result => {
-      console.log(`Items added since ${days} ago`);
+      console.log(`Items added since ${daysAgo} ago`);
       console.log(result);
     });
 }
@@ -61,6 +62,7 @@ function getTotalCostByCategory() {
     .from('shopping_list')
     .groupBy('category')
     .then(result => {
+      console.log('COST PER CATEGORY');
       console.log(result);
     });   
 }

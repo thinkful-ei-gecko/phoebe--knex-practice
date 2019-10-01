@@ -17,4 +17,3 @@ CREATE TABLE IF NOT EXISTS shopping_list (
   category grocery NOT NULL
 );
 
-
